@@ -1,1 +1,38 @@
-this is second file
+pipeline {
+   agent {label 'master'}
+   triggers {
+     pollscm '* * * * *'
+	 }
+   stages {
+      stage('git checkout stage') {
+	    steps {
+		  echo "this is the checkout stage "
+		  sh 'sleep 10'
+		  }
+		}    
+	  stage('build stage') {
+	    steps {
+		parallel ( 
+		  step1: {
+		  echo "this is the parallel step 1 "
+		  sh 'sleep 5'
+		  },
+		  step2: {
+		  echo "this is the parallel step 2 "
+		  sh 'sleep 5'
+		  },
+		  step3: {
+		  echo "this is the parallel step 3 "
+		  sh 'sleep 5'
+		  }
+		  )
+		}
+		}
+      stage('deploy stage') {
+	    steps {
+		  echo "this is the deploy stage "
+		  sh 'sleep 10'
+		  }
+		}
+		}
+}
