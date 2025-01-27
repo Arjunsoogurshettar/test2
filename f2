@@ -1,7 +1,7 @@
 pipeline {
    agent {label 'master'}
    triggers {
-     pollscm '* * * * *'
+     pollSCM '* * * * *'
 	 }
    stages {
       stage('git checkout stage') {
